@@ -14,9 +14,6 @@ import java.util.Properties;
 
 @SpringBootApplication
 public class EventAgencyApplication {
-
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(EventAgencyApplication.class, args);
 	}
