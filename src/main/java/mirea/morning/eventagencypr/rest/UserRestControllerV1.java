@@ -45,6 +45,6 @@ public class UserRestControllerV1 {
 
         userService.register(u);
 
-        return new ResponseEntity<>(result, HttpStatus.OK);//eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0Iiwicm9sZXMiOltdLCJpYXQiOjE2ODI2MTcxMTAsImV4cCI6MTY4MjYyMDcxMH0.6VuPDfon-9GcVlk9D0qVOXgLJ8ZXusBr37X8nxa3ZdM
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

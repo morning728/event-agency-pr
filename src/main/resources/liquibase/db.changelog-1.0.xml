@@ -111,5 +111,13 @@
         <insert tableName="roles" schemaName="mirea">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
+
+        <insert tableName="users" schemaName="mirea">
+            <column name="username" value="username"/>
+            <column name="first_name" value="f"/>
+            <column name="last_name" value="l"/>
+            <column name="email" value="e"/>
+            <column name="password" value="$2a$12$5e/c03agqEqbkbVP7wQyHusDdIBmx1iIa3HMnv2pW.eRK/ZhZQR2i"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
