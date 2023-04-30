@@ -30,4 +30,10 @@ public class User extends BaseEntity {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},//ИЗУЧИТЬ
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private List<Role> roles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_basket",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},//ИЗУЧИТЬ
+            inverseJoinColumns = {@JoinColumn(name = "event_id", referencedColumnName = "id")})
+    private List<Event> basket;
 }

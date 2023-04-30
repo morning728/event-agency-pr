@@ -68,6 +68,45 @@
             </column>
         </createTable>
     </changeSet>
+    <changeSet id="1.0.6" author="morning728">
+        <createTable tableName="events" schemaName="mirea">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price_for_person" type="INT" defaultValue="1000">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="event_type" type="VARCHAR(50)" defaultValue="OTHER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="minimum_price" type="BIGINT" defaultValue="10000">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 
     <changeSet id="1.0.2" author="morning728">
         <createTable tableName="user_roles" schemaName="mirea">
@@ -75,6 +114,16 @@
             </column>
 
             <column name="role_id" type="BIGINT">
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="morning728">
+        <createTable tableName="user_basket" schemaName="mirea">
+            <column name="user_id" type="BIGINT">
+            </column>
+
+            <column name="event_id" type="BIGINT">
             </column>
         </createTable>
     </changeSet>
@@ -103,6 +152,30 @@
                                  referencedTableSchemaName="mirea"/>
     </changeSet>
 
+    <changeSet id="1.0.8" author="morning728">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_basket"
+                                 baseTableSchemaName="mirea"
+                                 constraintName="fk_user_basket_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"
+                                 referencedTableSchemaName="mirea"/>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="morning728">
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="user_basket"
+                                 baseTableSchemaName="mirea"
+                                 constraintName="fk_user_basket_events"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="events"
+                                 referencedTableSchemaName="mirea"/>
+    </changeSet>
+
     <changeSet id="1.0.5" author="morning728">
         <insert tableName="roles" schemaName="mirea">
             <column name="name" value="ROLE_USER"/>
@@ -111,6 +184,47 @@
         <insert tableName="roles" schemaName="mirea">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
+
+        <insert tableName="events" schemaName="mirea">
+            <column name="name" value="Avatar Birthday"/>
+            <column name="description" value="Very funny event"/>
+            <column name="price_for_person" value="600"/>
+            <column name="minimum_price" value="6900"/>
+            <column name="event_type" value="BIRTHDAY"/>
+        </insert>
+
+        <insert tableName="events" schemaName="mirea">
+            <column name="name" value="Hockey Tour"/>
+            <column name="description" value="Event for real mens)))"/>
+            <column name="price_for_person" value="1200"/>
+            <column name="minimum_price" value="87300"/>
+            <column name="event_type" value="SPORT"/>
+        </insert>
+
+        <insert tableName="events" schemaName="mirea">
+            <column name="name" value="Silence Hill"/>
+            <column name="description" value="Very scary event"/>
+            <column name="price_for_person" value="300"/>
+            <column name="minimum_price" value="4900"/>
+            <column name="event_type" value="OTHER"/>
+        </insert>
+
+        <insert tableName="events" schemaName="mirea">
+            <column name="name" value="NoHangover party"/>
+            <column name="description" value="Very meaningless event"/>
+            <column name="price_for_person" value="100"/>
+            <column name="minimum_price" value="700"/>
+            <column name="event_type" value="TEAM_BUILDING"/>
+        </insert>
+
+        <insert tableName="events" schemaName="mirea">
+            <column name="name" value="October fest"/>
+            <column name="description" value="Very strange event"/>
+            <column name="price_for_person" value="350"/>
+            <column name="minimum_price" value="54000"/>
+            <column name="event_type" value="FESTIVAL"/>
+        </insert>
+
 
         <insert tableName="users" schemaName="mirea">
             <column name="username" value="username"/>

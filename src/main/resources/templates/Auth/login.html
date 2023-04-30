@@ -5,22 +5,24 @@
     <title>login</title>
 </head>
 <body>
-<div th:text="${request.getUsername()}">username</div>
-<form th:method="POST" th:action="@{/auth/login}" th:object="${request}">
+<div id="PreMessage">Please, enter username and password</div>
+<form th:method="POST" th:action="@{/api/v1/auth/login}" id="form">
   <div>
     <div style="display:flex; flex-direction:row">
       <div>
-        <label for="name"> username</label>
-        <input type="text" id="name" th:field="*{username}">
+        <label for="username"> username</label>
+        <input type="text" id="username" name="username" required>
       </div>
     </div>
     <br>
     <label for="password"> password</label>
-    <input type="text" id="password" th:field="*{password}">
-    <input type="checkbox" id="remember" name="remember-me">
-    <label for="remember">remember me</label>
+    <input type="text" id="password" name="password" required>
   </div>
   <button type="submit">submit</button>
 </form>
+
+
+
+<script type="text/javascript" src="/js/auth.js"></script>
 </body>
 </html>
