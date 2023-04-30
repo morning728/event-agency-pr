@@ -42,7 +42,12 @@ public class AuthenticationControllerV1 {
     public String login(@RequestBody AuthenticationRequestDto requestDto, Model model) {
         try {
             String username = requestDto.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+            try {
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+            } catch (AuthenticationException e){
+                model.addAttribute("errorMsg", "Invalid");
+
+            }
             User user = userService.findByUsername(username);
 
             if (user == null) {
