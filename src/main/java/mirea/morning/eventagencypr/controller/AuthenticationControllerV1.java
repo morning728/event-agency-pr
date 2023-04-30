@@ -1,4 +1,4 @@
-package mirea.morning.eventagencypr.rest;
+package mirea.morning.eventagencypr.controller;
 
 import mirea.morning.eventagencypr.dto.AuthenticationRequestDto;
 import mirea.morning.eventagencypr.model.User;
@@ -11,6 +11,8 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping(value = "/api/v1/auth/")
-public class AuthenticationRestControllerV1 {
+public class AuthenticationControllerV1 {
 
     private final AuthenticationManager authenticationManager;
 
@@ -30,30 +32,34 @@ public class AuthenticationRestControllerV1 {
     private final UserService userService;
 
     @Autowired
-    public AuthenticationRestControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
+    public AuthenticationControllerV1(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;
     }
 
     @PostMapping("login")
-    public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+    public String login(@RequestBody AuthenticationRequestDto requestDto, Model model) {
         try {
             String username = requestDto.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
             User user = userService.findByUsername(username);
 
             if (user == null) {
+                model.addAttribute("errorMsg", "Invalid");
                 throw new UsernameNotFoundException("User with username: " + username + " not found");
             }
             System.out.println(user.getRoles());
             String token = jwtTokenProvider.createToken(username, user.getRoles());
 
-            Map<Object, Object> response = new HashMap<>();
-            response.put("username", username);
-            response.put("token", token);
+//            Map<Object, Object> response = new HashMap<>();
+//            response.put("username", username);
+//            response.put("token", token);
 
-            return ResponseEntity.ok(response);
+            model.addAttribute("username", username);
+            model.addAttribute("token", token);
+
+            return "successfulAuth";
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }

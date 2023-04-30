@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<div th:text="${request.getUsername()}">username</div>
+<form th:method="POST" th:action="@{/auth/login}" th:object="${request}">
+  <div>
+    <div style="display:flex; flex-direction:row">
+      <div>
+        <label for="name"> username</label>
+        <input type="text" id="name" th:field="*{username}">
+      </div>
+    </div>
+    <br>
+    <label for="password"> password</label>
+    <input type="text" id="password" th:field="*{password}">
+    <input type="checkbox" id="remember" name="remember-me">
+    <label for="remember">remember me</label>
+  </div>
+  <button type="submit">submit</button>
+</form>
+</body>
+</html>
