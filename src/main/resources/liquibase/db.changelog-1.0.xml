@@ -227,11 +227,32 @@
 
 
         <insert tableName="users" schemaName="mirea">
-            <column name="username" value="username"/>
+            <column name="username" value="admin"/>
             <column name="first_name" value="f"/>
             <column name="last_name" value="l"/>
             <column name="email" value="e"/>
             <column name="password" value="$2a$12$5e/c03agqEqbkbVP7wQyHusDdIBmx1iIa3HMnv2pW.eRK/ZhZQR2i"/>
+        </insert>
+
+        <insert tableName="users" schemaName="mirea">
+            <column name="username" value="user"/>
+            <column name="first_name" value="f"/>
+            <column name="last_name" value="l"/>
+            <column name="email" value="em"/>
+            <column name="password" value="$2a$12$5e/c03agqEqbkbVP7wQyHusDdIBmx1iIa3HMnv2pW.eRK/ZhZQR2i"/>
+        </insert>
+
+        <insert tableName="user_roles" schemaName="mirea">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="user_roles" schemaName="mirea">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="2"/>
+        </insert>
+        <insert tableName="user_roles" schemaName="mirea">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

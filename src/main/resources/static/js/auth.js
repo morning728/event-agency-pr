@@ -21,7 +21,7 @@ if (form != null) {
 
                 return response.json(); // Парсим ответ в формате JSON
             } else {
-                alert("asd");
+                alert("Invalid Data ^-^");
             }
         }).then(data => {
             // Сохраняем полученный токен в localStorage или sessionStorage
@@ -29,7 +29,6 @@ if (form != null) {
             if(data.token){
                 token = data.token;
                 sessionStorage.setItem('token', token);
-                alert(token);
             }
             else{
                 document.getElementById("PreMessage").textContent = data.errorMsg;

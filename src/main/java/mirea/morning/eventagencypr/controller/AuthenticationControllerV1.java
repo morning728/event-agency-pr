@@ -77,4 +77,10 @@ public class AuthenticationControllerV1 {
     public ResponseEntity checkToken() {
         return ResponseEntity.ok(200);
     }
+
+    @GetMapping("checkAdmin")
+    @ResponseBody
+    public ResponseEntity checkTokenRole() {
+        return ResponseEntity.ok(200);
+    }
 }

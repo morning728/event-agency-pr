@@ -5,14 +5,61 @@
   <title>Events</title>
 </head>
 <body>
-<div style="width:80%; margin:auto; position: relative; display: block;" id="eventHolder">
-  <div th:each="event : ${events}">
-    <h4 th:text="${event.getName()}">Event Name</h4>
-    <p th:text="${'About : ' +  event.getDescription()}">Event Description</p>
-    <p th:text="${'Price : ' + event.getMinimumPrice() + ' rubles'}">Event Min Price</p>
+<div style="width:80%; margin:auto; position: relative; display: block;">
+
+
+  <form th:method="POST" th:action="@{/catalog/sort}" id="sortByForm">
+    <div>
+
+      <p><select size="1" name="sortByChoice" id="sortByChoice"
+                 onchange="changeSortField()" >
+        <option selected disabled>Choose filter field</option>
+        <option value="typeFiled">Event Type</option>
+        <option value="minPrice">Minimum Price</option>
+        <option value="priceForPerson">Price For Person</option>
+      </select></p>
+
+
+<!--      <input type="text" id="type" name="type" >-->
+      <label for="type" id="type_label" style="display:none">type</label>
+      <select size="1" name="type" id="type" style="display:none">
+        <option selected disabled value="TYPE">TYPE</option>
+        <option value="FESTIVAL">FESTIVAL</option>
+        <option value="SPORT" >SPORT</option>
+        <option value="BIRTHDAY">BIRTHDAY</option>
+      </select>
+
+      <label for="minPriceForPerson" id="minPriceForPerson_label" style="display:none"> minPriceForPerson</label>
+      <input type="number" id="minPriceForPerson" name="minPriceForPerson" style="display:none">
+
+      <label for="maxPriceForPerson" id="maxPriceForPerson_label" style="display:none"> maxPriceForPerson</label>
+      <input type="number" id="maxPriceForPerson" name="maxPriceForPerson" style="display:none">
+
+      <label for="minMinPrice" id="minMinPrice_label" style="display:none"> minMinPrice</label>
+      <input type="number" id="minMinPrice" name="minMinPrice" style="display:none">
+
+      <label for="maxMinPrice" id="maxMinPrice_label" style="display:none"> maxMinPrice</label>
+      <input type="number" id="maxMinPrice" name="maxMinPrice" style="display:none">
+    </div>
+    <button type="submit" style="display:none" id="sortBtn">sort</button>
+  </form>
+
+<div id="eventHolder">
+  <div th:each="event : ${events}" >
+      <a th:text="${event.getName()}" th:href="@{/catalog/{id}(id=${event.getId()})}">Event Name</a>
+      <p th:text="${'About : ' +  event.getDescription()}">Event Description</p>
+      <p th:text="${'Price : ' + event.getMinimumPrice() + ' rubles'}">Event Min Price</p>
+      <br>
+      <form th:action="@{/catalog/{id}/edit(id=${event.getId()})}" th:method="GET" class="editBtn" style="display:none">
+        <input type="submit" value="Edit" />
+      </form>
+
     <br>
   </div>
-  <form th:method="POST" th:action="@{/catalog}" id="addingEventForm">
+</div>
+
+
+  <form th:method="POST" th:action="@{/catalog}" id="addingEventForm"  style="display:none">
     <h2>Event Adding Form</h2>
     <div>
       <label for="name"> Event Name</label>
@@ -24,5 +71,8 @@
 </div>
 
 <script type="text/javascript" src="/js/checkToken.js"></script>
+<script type="text/javascript" src="/js/mainPageScript.js"></script>
+<script type="text/javascript" src="/js/filterEvents.js"></script>
+<script type="text/javascript" src="/js/mainPageAdminVisibility.js"></script>
 </body>
 </html>

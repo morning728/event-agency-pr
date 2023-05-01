@@ -1,8 +1,10 @@
 package mirea.morning.eventagencypr.service.Impl;
 
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mirea.morning.eventagencypr.model.Event;
+import mirea.morning.eventagencypr.model.Exception.EventNotFoundException;
 import mirea.morning.eventagencypr.model.enums.EventType;
 import mirea.morning.eventagencypr.repository.EventRepository;
 import mirea.morning.eventagencypr.service.EventService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -51,6 +54,18 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public Event findById(Long id) {
+        Optional<Event> result = repository.findById(id);
+        log.info(
+                result.isPresent() ?
+                        "EventRepository.findById() - event with id " + id +" was found" :
+                        "EventRepository.findById() - event with id " + id +" was not found"
+        );
+        if(result.isEmpty()) throw new EventNotFoundException("EventRepository.findById() - event with id " + id +" was not found");
+        return result.get();
+    }
+
+    @Override
     public List<Event> findByPriceForPerson(Long min, Long max) {
         List<Event> result;
         max = max == null ? 0 : max;
@@ -83,18 +98,29 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> filter(EventType type,
+    public List<Event> filter(String type,
                               Long minPriceForPerson,
                               Long maxPriceForPerson,
                               Long minMinPrice,
                               Long maxMinPrice) {
-        if (type != null)
-            return findByType(type);
-        else if (maxMinPrice != null || minMinPrice != null)
+        if (type != null && !type.equals("TYPE"))
+            return findByType(EventType.valueOf(type));
+        else if (maxMinPrice != 0 || minMinPrice != 0)
             return findByMinPrice(minMinPrice, maxMinPrice);
-        else if (minPriceForPerson != null || maxPriceForPerson != null)
+        else if (minPriceForPerson != 0 || maxPriceForPerson != 0)
             return findByPriceForPerson(minPriceForPerson, maxPriceForPerson);
         else
             return getAll();
+    }
+
+    @Override
+    public Event updateEvent(Event event) {
+        Event toUpdate = findById(event.getId());
+        toUpdate.setDescription(event.getDescription());
+        toUpdate.setName(event.getName());
+        toUpdate.setType(event.getType());
+        toUpdate.setMinimumPrice(event.getMinimumPrice());
+        toUpdate.setPriceForPerson(event.getPriceForPerson());
+        return repository.save(toUpdate);
     }
 }

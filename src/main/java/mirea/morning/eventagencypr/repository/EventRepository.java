@@ -14,14 +14,16 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByType(EventType type);
 
     @Query(
-            value = "SELECT * FROM EVENTS e WHERE e.price_for_person >= :minPrice" +
+            value = "SELECT * FROM mirea.EVENTS e WHERE e.price_for_person >= :minPrice" +
                     " AND e.price_for_person <= :maxPrice",
             nativeQuery = true)
     List<Event> findByPriceForPerson(Long minPrice, Long maxPrice);
 
     @Query(
-            value = "SELECT * FROM EVENTS e WHERE e.minimum_price >= :minPrice" +
+            value = "SELECT * FROM mirea.EVENTS e WHERE e.minimum_price >= :minPrice" +
                     " AND e.minimum_price <= :maxPrice",
             nativeQuery = true)
     List<Event> findByMinPrice(Long minPrice, Long maxPrice);
+
+    Optional<Event> findById(Long id);
 }

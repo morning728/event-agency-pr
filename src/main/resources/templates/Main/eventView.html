@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Events</title>
+</head>
+<body>
+<div style="width:80%; margin:auto; position: relative; display: block;">
+
+  <div >
+    <h3 th:text="${event.getName()}">name</h3>
+    <p th:text="${'Description: ' + event.getDescription()}">description</p>
+    <p th:text="${'minimumPrice: ' + event.getMinimumPrice()}">minimumPrice</p>
+    <p th:text="${'type: ' + event.getType()}">type</p>
+    <p th:text="${'price for person: ' + event.getPriceForPerson()}">price for person</p>
+  </div>
+
+
+
+  <form th:method="GET" th:action="@{/catalog/{id}/edit(id=${event.getId()})}"  id="change">
+    <button type="submit" id="changeEventBtn">edit</button>
+  </form>
+
+</div>
+
+<script type="text/javascript" src="/js/checkToken.js"></script>
+</body>
+</html>

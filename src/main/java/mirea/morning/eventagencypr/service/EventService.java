@@ -13,14 +13,17 @@ public interface EventService {
     Event findByName(String name);
 
     List<Event> findByType(EventType type);
+    Event findById(Long id);
     List<Event> findByPriceForPerson(Long min, Long max);
     List<Event> findByMinPrice(Long min, Long max);
 
     List<Event> filter(
-            EventType type,
+            String type,
             Long minPriceForPerson,
             Long maxPriceForPerson,
             Long minMinPrice,
             Long maxMinPrice
     );
+
+    Event updateEvent(Event event);
 }
