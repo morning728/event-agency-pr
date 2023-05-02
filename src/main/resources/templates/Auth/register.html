@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Reg Page</title>
     <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
@@ -10,15 +10,15 @@
     <nav>
       <ul>
         <li><a href="/catalog/">Catalog</a></li>
-        <li><a  href="/api/v1/auth/register">Register</a></li>
-        <li><a class="active" href="/api/v1/auth/login">Login</a></li>
+        <li><a class="active" href="/api/v1/auth/register">Register</a></li>
+        <li><a  href="/api/v1/auth/login">Login</a></li>
         <li><a href="/reviews/">Reviews</a></li>
         <li><a href="/orders/">Orders</a></li>
       </ul>
     </nav>
   </header>
   <main>
-    <h1>Login</h1>
+    <h1>Registration</h1>
     <form th:method="POST" th:action="@{/api/v1/auth/login}" id="form">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required>
@@ -30,8 +30,6 @@
   <footer>
     <p>&copy; 2023, gromykhalin Matvey</p>
   </footer>
-<script type="text/javascript" src="/js/auth.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
 </body>
 </html>
-
-

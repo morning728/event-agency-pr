@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import mirea.morning.eventagencypr.model.Order;
 import mirea.morning.eventagencypr.model.Review;
+import mirea.morning.eventagencypr.model.enums.Status;
 
 import java.util.Date;
 
@@ -31,6 +32,9 @@ public class ReviewDto {
         result.setName(name);
         result.setDetails(details);
         result.setAuthorId(authorId);
+        result.setCreated(new Date());
+        result.setUpdated(new Date());
+        result.setStatus(Status.ACTIVE);
 
         return result;
     }

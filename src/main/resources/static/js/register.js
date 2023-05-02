@@ -11,7 +11,7 @@ if (form != null) {
         const password = form.querySelector('#password').value;
 
         // Отправляем асинхронный POST-запрос на сервер для авторизации
-        fetch('/api/v1/auth/login', {
+        fetch('/api/v1/auth/register', {
             method: 'POST',
             body: JSON.stringify({username, password}),
             headers: {'Content-Type': 'application/json'}

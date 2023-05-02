@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import mirea.morning.eventagencypr.model.Event;
 import mirea.morning.eventagencypr.model.Order;
+import mirea.morning.eventagencypr.model.enums.Status;
 
 import java.util.Date;
 
@@ -37,6 +38,9 @@ public class OrderDto {
         result.setAuthorId(authorId);
         result.setWantedDate(wantedDate);
         result.setWantedEventId(wantedEventId);
+        result.setCreated(new Date());
+        result.setUpdated(new Date());
+        result.setStatus(Status.ACTIVE);
 
         return result;
     }

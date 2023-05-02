@@ -62,3 +62,73 @@ function changeSortField(){
     }
 
 }
+
+
+
+const formOrd = document.getElementById('addingOrderForm');
+var token = sessionStorage.getItem('token');
+var header = 'Bearer_' + token;
+var authorId;
+
+if(token){
+    fetch('/api/v1/users/getUsername?token=' + token, {
+            method: 'GET',
+            headers: {
+                      'Authorization': header
+                    }
+    }).then(response => {
+        if (response.ok) { // Если запрос успешен
+
+            return response.json(); // Парсим ответ в формате JSON
+        } else {
+            alert("Invalid Data ^-^");
+        }
+    }).then(data => {
+          // Сохраняем полученный токен в localStorage или sessionStorage
+          //document.cookie = `token=${data.token}`
+          authorId = data.id;
+
+
+    }).catch(error => {
+        console.error(error);
+    });
+
+} else {
+    location.href = '/api/v1/auth/login';
+}
+
+if (formOrd != null) {
+    formOrd.addEventListener('submit', (event) => {
+        event.preventDefault(); // Отменяем отправку формы по умолчанию
+
+        const name = formOrd.querySelector('#ordName').value;
+        const details = formOrd.querySelector('#ordDetails').value;
+        const wantedDate = formOrd.querySelector('#ordDate').value;
+
+        // Отправляем асинхронный POST-запрос на сервер для авторизации
+        fetch('/orders/', {
+            method: 'POST',
+            body: JSON.stringify({
+                name,
+                details,
+                ordDate,
+                authorId
+            }),
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': header
+            }
+        }).then(response => {
+
+            if (response.ok) { // Если запрос успешен
+
+                alert("Your order was saved!");
+                location.href="/catalog/";
+            } else {
+                alert("Invalid Data ^-^");
+            }
+        }).catch(error => {
+            console.error(error);
+        });
+    });
+}

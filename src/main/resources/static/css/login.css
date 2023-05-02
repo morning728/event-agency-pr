@@ -1,0 +1,90 @@
+/* Styles for header and navigation */
+header {
+    background-color: #ffdab9;
+    color: #333;
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  nav li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  nav li a.active {
+    text-decoration: underline;
+  }
+  
+  /* Styles for login form */
+  main {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  form {
+    display: inline-block;
+    text-align: left;
+    background-color: #ffe5b4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffa07a;
+    color: #fff;
+    cursor: pointer;
+  }
+  button[type="submit"]:hover {
+    background-color: #ff8c66;
+  }
+  
+  /* Styles for footer */
+  footer {
+    background-color: #ffdab9;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/catalog/">Catalog</a></li>
+            <li><a  href="/api/v1/auth/register">Register</a></li>
+            <li><a href="/api/v1/auth/login">Login</a></li>
+            <li><a href="/reviews/">Reviews</a></li>
+            <li><a href="/orders/">Orders</a></li>
+        </ul>
+    </nav>
+</header>
+    <div id="orderHolder">
+        <div th:each="order : ${orders}" >
+            <a th:text="${order.getName()}"></a>
+            <p th:text="${order.getAuthorId()}"></p>
+            <p th:text="${order.getDetails()}"></p>
+            <p th:text="${order.getWantedDate()}"></p>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+
+<footer>
+    <p>&copy; 2023, gromykhalin Matvey</p>
+</footer>
+
+<script type="text/javascript" src="/js/checkToken.js"></script>
+<script type="text/javascript" src="/js/checkAdmin.js"></script>
+</body>
+</html>
