@@ -45,6 +45,7 @@ public class SecurityConfig  {
                 .requestMatchers("/js/**").permitAll()
                 .requestMatchers("/css/**").permitAll()
                 .requestMatchers("/catalog/**").permitAll()
+                .requestMatchers("/catalog").permitAll()
                 .requestMatchers("/reviews/**").permitAll()
                 .requestMatchers("/orders/**").permitAll()
                 .requestMatchers("/api/v1/auth/checkAdmin").hasRole("ADMIN")
