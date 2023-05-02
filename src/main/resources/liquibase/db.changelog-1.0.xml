@@ -5,7 +5,7 @@
 
 
     <changeSet id="1.0.0" author="morning728">
-        <createTable tableName="users" schemaName="mirea">
+        <createTable tableName="user" schemaName="mirea">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -46,7 +46,7 @@
     </changeSet>
 
     <changeSet id="1.0.1" author="morning728">
-        <createTable tableName="roles" schemaName="mirea">
+        <createTable tableName="role" schemaName="mirea">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -69,7 +69,7 @@
         </createTable>
     </changeSet>
     <changeSet id="1.0.6" author="morning728">
-        <createTable tableName="events" schemaName="mirea">
+        <createTable tableName="event" schemaName="mirea">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -109,7 +109,7 @@
     </changeSet>
 
     <changeSet id="1.0.2" author="morning728">
-        <createTable tableName="user_roles" schemaName="mirea">
+        <createTable tableName="user_role" schemaName="mirea">
             <column name="user_id" type="BIGINT">
             </column>
 
@@ -130,25 +130,25 @@
 
     <changeSet id="1.0.3" author="morning728">
         <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="user_roles"
+                                 baseTableName="user_role"
                                  baseTableSchemaName="mirea"
-                                 constraintName="fk_user_roles_user"
+                                 constraintName="fk_user_role_user"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="users"
+                                 referencedTableName="user"
                                  referencedTableSchemaName="mirea"/>
     </changeSet>
 
     <changeSet id="1.0.4" author="morning728">
         <addForeignKeyConstraint baseColumnNames="role_id"
-                                 baseTableName="user_roles"
+                                 baseTableName="user_role"
                                  baseTableSchemaName="mirea"
-                                 constraintName="fk_user_roles_roles"
+                                 constraintName="fk_user_role_role"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="roles"
+                                 referencedTableName="role"
                                  referencedTableSchemaName="mirea"/>
     </changeSet>
 
@@ -160,7 +160,7 @@
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="users"
+                                 referencedTableName="user"
                                  referencedTableSchemaName="mirea"/>
     </changeSet>
 
@@ -168,24 +168,96 @@
         <addForeignKeyConstraint baseColumnNames="event_id"
                                  baseTableName="user_basket"
                                  baseTableSchemaName="mirea"
-                                 constraintName="fk_user_basket_events"
+                                 constraintName="fk_user_basket_event"
                                  onDelete="CASCADE"
                                  onUpdate="RESTRICT"
                                  referencedColumnNames="id"
-                                 referencedTableName="events"
+                                 referencedTableName="event"
                                  referencedTableSchemaName="mirea"/>
     </changeSet>
 
+    <changeSet id="1.0.10" author="morning728">
+        <createTable tableName="order" schemaName="mirea">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="author_id" type="BIGINT" >
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="details" type="VARCHAR(500)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="wanted_event_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="wanted_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.11" author="morning728">
+        <createTable tableName="review" schemaName="mirea">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="author_id" type="BIGINT" >
+                <constraints nullable="false" unique="false"/>
+            </column>
+
+            <column name="details" type="VARCHAR(500)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
     <changeSet id="1.0.5" author="morning728">
-        <insert tableName="roles" schemaName="mirea">
+        <insert tableName="role" schemaName="mirea">
             <column name="name" value="ROLE_USER"/>
         </insert>
 
-        <insert tableName="roles" schemaName="mirea">
+        <insert tableName="role" schemaName="mirea">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
 
-        <insert tableName="events" schemaName="mirea">
+        <insert tableName="event" schemaName="mirea">
             <column name="name" value="Avatar Birthday"/>
             <column name="description" value="Very funny event"/>
             <column name="price_for_person" value="600"/>
@@ -193,7 +265,7 @@
             <column name="event_type" value="BIRTHDAY"/>
         </insert>
 
-        <insert tableName="events" schemaName="mirea">
+        <insert tableName="event" schemaName="mirea">
             <column name="name" value="Hockey Tour"/>
             <column name="description" value="Event for real mens)))"/>
             <column name="price_for_person" value="1200"/>
@@ -201,7 +273,7 @@
             <column name="event_type" value="SPORT"/>
         </insert>
 
-        <insert tableName="events" schemaName="mirea">
+        <insert tableName="event" schemaName="mirea">
             <column name="name" value="Silence Hill"/>
             <column name="description" value="Very scary event"/>
             <column name="price_for_person" value="300"/>
@@ -209,7 +281,7 @@
             <column name="event_type" value="OTHER"/>
         </insert>
 
-        <insert tableName="events" schemaName="mirea">
+        <insert tableName="event" schemaName="mirea">
             <column name="name" value="NoHangover party"/>
             <column name="description" value="Very meaningless event"/>
             <column name="price_for_person" value="100"/>
@@ -217,7 +289,7 @@
             <column name="event_type" value="TEAM_BUILDING"/>
         </insert>
 
-        <insert tableName="events" schemaName="mirea">
+        <insert tableName="event" schemaName="mirea">
             <column name="name" value="October fest"/>
             <column name="description" value="Very strange event"/>
             <column name="price_for_person" value="350"/>
@@ -226,7 +298,7 @@
         </insert>
 
 
-        <insert tableName="users" schemaName="mirea">
+        <insert tableName="user" schemaName="mirea">
             <column name="username" value="admin"/>
             <column name="first_name" value="f"/>
             <column name="last_name" value="l"/>
@@ -234,7 +306,7 @@
             <column name="password" value="$2a$12$5e/c03agqEqbkbVP7wQyHusDdIBmx1iIa3HMnv2pW.eRK/ZhZQR2i"/>
         </insert>
 
-        <insert tableName="users" schemaName="mirea">
+        <insert tableName="user" schemaName="mirea">
             <column name="username" value="user"/>
             <column name="first_name" value="f"/>
             <column name="last_name" value="l"/>
@@ -242,15 +314,15 @@
             <column name="password" value="$2a$12$5e/c03agqEqbkbVP7wQyHusDdIBmx1iIa3HMnv2pW.eRK/ZhZQR2i"/>
         </insert>
 
-        <insert tableName="user_roles" schemaName="mirea">
+        <insert tableName="user_role" schemaName="mirea">
             <column name="user_id" value="1"/>
             <column name="role_id" value="1"/>
         </insert>
-        <insert tableName="user_roles" schemaName="mirea">
+        <insert tableName="user_role" schemaName="mirea">
             <column name="user_id" value="1"/>
             <column name="role_id" value="2"/>
         </insert>
-        <insert tableName="user_roles" schemaName="mirea">
+        <insert tableName="user_role" schemaName="mirea">
             <column name="user_id" value="2"/>
             <column name="role_id" value="1"/>
         </insert>

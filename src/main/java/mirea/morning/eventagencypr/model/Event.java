@@ -7,7 +7,7 @@ import mirea.morning.eventagencypr.model.enums.EventType;
 import java.util.List;
 
 @Entity
-@Table(name = "events", schema = "mirea")
+@Table(name = "event", schema = "mirea")
 @Data
 public class Event extends BaseEntity{
     @Column(name = "name")
