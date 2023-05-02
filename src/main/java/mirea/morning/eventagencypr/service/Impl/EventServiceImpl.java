@@ -27,29 +27,34 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> getAll() {
-        log.info("EventRepository.getAll() - All events were found");
+        log.info("EventRepository.getAll() - " +
+                "All events were found");
         return repository.findAll();
     }
 
     @Override
     public Event findByName(String name) {
         Event result = repository.findByName(name);
-        if(result == null){
-            log.info("EventRepository.findByName() - Event with name {} was not found", name);
+        if (result == null) {
+            log.info("EventRepository.findByName() - " +
+                    "Event with name {} was not found", name);
             return null;
         }
-        log.info("EventRepository.findByName() - Event with name {} was found", name);
+        log.info("EventRepository.findByName() - " +
+                "Event with name {} was found", name);
         return result;
     }
 
     @Override
     public List<Event> findByType(EventType type) {
         List<Event> result = repository.findByType(type);
-        if(result.isEmpty()){
-            log.info("EventRepository.findByType() - no one event with type {} was found", type.toString());
+        if (result.isEmpty()) {
+            log.info("EventRepository.findByType() - " +
+                    "no one event with type {} was found", type.toString());
             return null;
         }
-        log.info("EventRepository.findByType() - all events with type {} were found", type.toString());
+        log.info("EventRepository.findByType() - " +
+                "all events with type {} were found", type.toString());
         return result;
     }
 
@@ -58,10 +63,11 @@ public class EventServiceImpl implements EventService {
         Optional<Event> result = repository.findById(id);
         log.info(
                 result.isPresent() ?
-                        "EventRepository.findById() - event with id " + id +" was found" :
-                        "EventRepository.findById() - event with id " + id +" was not found"
+                        "EventRepository.findById() - event with id " + id + " was found" :
+                        "EventRepository.findById() - event with id " + id + " was not found"
         );
-        if(result.isEmpty()) throw new EventNotFoundException("EventRepository.findById() - event with id " + id +" was not found");
+        if (result.isEmpty()) throw new EventNotFoundException("EventRepository.findById() - " +
+                "event with id " + id + " was not found");
         return result.get();
     }
 
@@ -73,10 +79,12 @@ public class EventServiceImpl implements EventService {
 
         result = repository.findByPriceForPerson(min, max);
 
-        if(result.isEmpty()){
-            log.info("EventRepository.findByPriceForPerson() - no one event with price for person between {} and {} was found", min, max);
+        if (result.isEmpty()) {
+            log.info("EventRepository.findByPriceForPerson() - " +
+                    "no one event with price for person between {} and {} was found", min, max);
         } else {
-            log.info("EventRepository.findByPriceForPerson() - all events with price for person between {} and {} were found", min, max);
+            log.info("EventRepository.findByPriceForPerson() - " +
+                    "all events with price for person between {} and {} were found", min, max);
         }
         return result;
     }
@@ -89,10 +97,12 @@ public class EventServiceImpl implements EventService {
 
         result = repository.findByMinPrice(min, max);
 
-        if(result.isEmpty()){
-            log.info("EventRepository.findByMinPrice() - no one event with min price between {} and {} was found", min, max);
+        if (result.isEmpty()) {
+            log.info("EventRepository.findByMinPrice() - " +
+                    "no one event with min price between {} and {} was found", min, max);
         } else {
-            log.info("EventRepository.findByMinPrice() - all events with min price between {} and {} were found", min, max);
+            log.info("EventRepository.findByMinPrice() - " +
+                    "all events with min price between {} and {} were found", min, max);
         }
         return result;
     }

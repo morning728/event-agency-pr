@@ -38,18 +38,15 @@ public class AuthenticationControllerV1 {
         return "Auth/login";
     }
 
-    @GetMapping("test")
-    public String test(Model model) {
-        return "Auth/successfulAuth";
-    }
-
     @PostMapping("login")
     @ResponseBody
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto, Model model) {
         String username = requestDto.getUsername();
         Map<Object, Object> response = new HashMap<>();
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(username, requestDto.getPassword())
+            );
         } catch (AuthenticationException e){
             response.put("errorMsg", "Invalid data");
             return(ResponseEntity.ok(response));
