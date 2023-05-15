@@ -2,7 +2,6 @@ package mirea.morning.eventagencypr.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import mirea.morning.eventagencypr.model.Order;
 import mirea.morning.eventagencypr.model.Review;
 import mirea.morning.eventagencypr.model.enums.Status;
 

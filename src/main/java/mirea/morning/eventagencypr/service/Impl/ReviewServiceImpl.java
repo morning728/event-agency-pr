@@ -3,7 +3,6 @@ package mirea.morning.eventagencypr.service.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mirea.morning.eventagencypr.model.Exception.OrderNotFoundException;
-import mirea.morning.eventagencypr.model.Order;
 import mirea.morning.eventagencypr.model.Review;
 import mirea.morning.eventagencypr.repository.ReviewRepository;
 import mirea.morning.eventagencypr.service.ReviewService;

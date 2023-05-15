@@ -1,6 +1,5 @@
 package mirea.morning.eventagencypr.service;
 
-import mirea.morning.eventagencypr.model.Order;
 import mirea.morning.eventagencypr.model.Review;
 
 import java.util.List;

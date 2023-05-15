@@ -3,7 +3,6 @@ package mirea.morning.eventagencypr.controller;
 
 import lombok.RequiredArgsConstructor;
 import mirea.morning.eventagencypr.dto.OrderDto;
-import mirea.morning.eventagencypr.model.Order;
 import mirea.morning.eventagencypr.service.OrderService;
 import mirea.morning.eventagencypr.service.UserService;
 import org.springframework.http.ResponseEntity;

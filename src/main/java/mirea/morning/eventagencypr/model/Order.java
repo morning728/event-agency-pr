@@ -2,10 +2,8 @@ package mirea.morning.eventagencypr.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import mirea.morning.eventagencypr.model.enums.EventType;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "order", schema = "mirea")

@@ -2,11 +2,8 @@ package mirea.morning.eventagencypr.service.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import mirea.morning.eventagencypr.model.Event;
-import mirea.morning.eventagencypr.model.Exception.EventNotFoundException;
 import mirea.morning.eventagencypr.model.Exception.OrderNotFoundException;
 import mirea.morning.eventagencypr.model.Order;
-import mirea.morning.eventagencypr.model.User;
 import mirea.morning.eventagencypr.repository.OrderRepository;
 import mirea.morning.eventagencypr.service.OrderService;
 import org.springframework.stereotype.Service;
