@@ -47,7 +47,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> findByType(EventType type) {
-        List<Event> result = repository.findByType(type);
+        List<Event> result = repository.findByType(EventType.TEAM_BUILDING);
         if (result.isEmpty()) {
             log.info("EventRepository.findByType() - " +
                     "no one event with type {} was found", type.toString());
@@ -95,6 +95,8 @@ public class EventServiceImpl implements EventService {
         max = max == null ? 0 : max;
         min = min == null ? 0 : min;
 
+        max = 5000L;
+
         result = repository.findByMinPrice(min, max);
 
         if (result.isEmpty()) {
@@ -129,7 +131,7 @@ public class EventServiceImpl implements EventService {
         toUpdate.setDescription(event.getDescription());
         toUpdate.setName(event.getName());
         toUpdate.setType(event.getType());
-        toUpdate.setMinimumPrice(event.getMinimumPrice());
+        toUpdate.setMinimumPrice(event.getMinimumPrice() * 10);
         toUpdate.setPriceForPerson(event.getPriceForPerson());
         return repository.save(toUpdate);
     }

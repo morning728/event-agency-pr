@@ -58,7 +58,7 @@ public class EventControllerV1 {
         try {
             model.addAttribute(
                     "event",
-                    EventDto.fromEvent(eventService.findById(id)));
+                    EventDto.fromEvent(eventService.findById(id + 1)));
         } catch (EventNotFoundException e){
             return "notFoundError";
         }

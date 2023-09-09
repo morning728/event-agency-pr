@@ -9,10 +9,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 
 @Configuration
@@ -48,9 +52,6 @@ public class SecurityConfig  {
                 .requestMatchers("/catalog").permitAll()
                 .requestMatchers("/reviews/**").permitAll()
                 .requestMatchers("/orders/**").permitAll()
-                .requestMatchers("/home/**").permitAll()
-                .requestMatchers("/items").permitAll()
-                .requestMatchers("/items/**").permitAll()
                 .requestMatchers("/api/v1/auth/checkAdmin").hasRole("ADMIN")
                 .requestMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 .anyRequest().authenticated()
@@ -62,26 +63,3 @@ public class SecurityConfig  {
         return http.build();
     }
 }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .httpBasic().disable()
-//                .csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(LOGIN_ENDPOINT).permitAll()
-//                .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-//                .anyRequest().authenticated()
-//                .and()
-//                .apply(new JwtConfigurer(jwtTokenProvider));
-//    }
-
-//Определение бина для encoder, он также используется для USeServiceImpl для
-// Кодировки пароля при регистрации
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//        return bCryptPasswordEncoder;
-//    }
